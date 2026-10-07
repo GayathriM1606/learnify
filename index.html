@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Learnify – LMS</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ================= SPLASH SCREEN ================= -->
+<div id="splash">
+  <h1>LEARNIFY</h1>
+  <p>Learning made simple.</p>
+  <div class="loader"></div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" class="hidden">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo" data-page="home">LEARNIFY</div>
+    <nav class="nav-links">
+      <button data-page="home">Home</button>
+      <button data-page="courses">Courses</button>
+      <button data-page="learning" class="auth-required">Learning</button>
+      <button data-page="dashboard" class="auth-required">Dashboard</button>
+      <button data-page="about">About</button>
+      <button data-page="profile" class="auth-required">Profile</button>
+    </nav>
+    <div class="nav-auth">
+      <button id="loginBtn" class="btn-outline">Login</button>
+      <button id="signupBtn" class="btn-solid">Sign Up</button>
+      <div id="userChip" class="hidden user-chip" data-page="profile">
+        <span id="userInitial">U</span>
+      </div>
+    </div>
+    <button id="menuToggle" class="menu-toggle">☰</button>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ================= HOME PAGE ================= -->
+    <section class="page" id="page-home">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Learn Without Limits</h1>
+          <p>Master new skills with expert-led courses, track your progress, and earn certificates that matter.</p>
+          <div class="hero-actions">
+            <button class="btn-solid big" data-page="courses">Explore Courses</button>
+            <button class="btn-outline big" id="heroCta">Join / Start Learning</button>
+          </div>
+        </div>
+        <div class="hero-visual">🎓</div>
+      </div>
+
+      <h2 class="section-title">Popular Courses</h2>
+      <div id="popularCourses" class="card-grid"></div>
+
+      <h2 class="section-title">Why Learnify</h2>
+      <div class="features-grid">
+        <div class="feature-card">📚<h3>Expert Content</h3><p>Curated courses by industry professionals.</p></div>
+        <div class="feature-card">🏆<h3>Certificates</h3><p>Earn verifiable certificates on completion.</p></div>
+        <div class="feature-card">📈<h3>Track Progress</h3><p>Detailed dashboards to monitor your growth.</p></div>
+        <div class="feature-card">💬<h3>Community</h3><p>Discuss, ask, and learn with peers.</p></div>
+      </div>
+
+      <h2 class="section-title">Student Progress Overview</h2>
+      <div class="progress-overview">
+        <div class="stat-box"><h3>12,500+</h3><p>Active Students</p></div>
+        <div class="stat-box"><h3>320+</h3><p>Courses</p></div>
+        <div class="stat-box"><h3>98%</h3><p>Completion Rate</p></div>
+        <div class="stat-box"><h3>4.8★</h3><p>Average Rating</p></div>
+      </div>
+
+      <div class="cta-banner">
+        <h2>Ready to start your journey?</h2>
+        <button class="btn-solid big" id="ctaJoin">Join Now</button>
+      </div>
+
+      <footer class="footer">
+        <div class="footer-cols">
+          <div><h4>Learnify</h4><p>Your learning partner.</p></div>
+          <div><h4>Quick Links</h4>
+            <p><a data-page="courses">Courses</a></p>
+            <p><a data-page="about">About Us</a></p>
+            <p><a data-page="extra-help">Help & Support</a></p>
+          </div>
+          <div><h4>More</h4>
+            <p><a data-page="extra-live">Live Classes</a></p>
+            <p><a data-page="extra-community">Community</a></p>
+            <p><a data-page="extra-leaderboard">Leaderboard</a></p>
+            <p><a data-page="extra-wishlist">Wishlist</a></p>
+          </div>
+        </div>
+        <p class="copyright">© 2026 Learnify. All rights reserved.</p>
+      </footer>
+    </section>
+
+    <!-- ================= AUTH PAGE ================= -->
+    <section class="page" id="page-auth">
+      <div class="auth-box">
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-authtab="login">Login</button>
+          <button class="tab-btn" data-authtab="signup">Sign Up</button>
+        </div>
+
+        <!-- LOGIN -->
+        <form id="loginForm" class="auth-form">
+          <h2>Welcome Back</h2>
+          <input type="email" placeholder="Email" id="loginEmail" required />
+          <input type="password" placeholder="Password" id="loginPassword" required />
+          <button type="submit" class="btn-solid full">Login</button>
+          <a href="#" id="forgotLink" class="link-small">Forgot Password?</a>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="signupForm" class="auth-form hidden">
+          <h2>Create Account</h2>
+          <input type="text" placeholder="Full Name" id="signupName" required />
+          <input type="email" placeholder="Email" id="signupEmail" required />
+          <input type="tel" placeholder="Mobile Number" id="signupMobile" required />
+          <input type="password" placeholder="Password" id="signupPassword" required />
+          <button type="submit" class="btn-solid full">Sign Up</button>
+        </form>
+
+        <!-- FORGOT PASSWORD -->
+        <form id="forgotForm" class="auth-form hidden">
+          <h2>Reset Password</h2>
+          <input type="email" placeholder="Enter your email" id="forgotEmail" required />
+          <button type="submit" class="btn-solid full">Send Reset Link</button>
+          <a href="#" id="backToLogin" class="link-small">Back to Login</a>
+        </form>
+
+        <!-- VERIFICATION -->
+        <form id="verifyForm" class="auth-form hidden">
+          <h2>Verify Your Account</h2>
+          <p class="muted">Enter the 6-digit OTP sent to your email/mobile.</p>
+          <input type="text" maxlength="6" placeholder="Enter OTP" id="otpInput" required />
+          <button type="submit" class="btn-solid full">Verify</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= COURSES PAGE ================= -->
+    <section class="page" id="page-courses">
+      <h2 class="section-title">All Courses</h2>
+      <div class="course-controls">
+        <input type="text" id="searchCourses" placeholder="Search courses..." />
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+          <option value="Development">Development</option>
+          <option value="Design">Design</option>
+          <option value="Data">Data</option>
+          <option value="Marketing">Marketing</option>
+        </select>
+        <select id="filterLevel">
+          <option value="">All Levels</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+        <select id="filterRating">
+          <option value="">All Ratings</option>
+          <option value="4">4★ & above</option>
+          <option value="4.5">4.5★ & above</option>
+        </select>
+      </div>
+      <div id="allCourses" class="card-grid"></div>
+    </section>
+
+    <!-- ================= COURSE DETAIL PAGE ================= -->
+    <section class="page" id="page-course-detail">
+      <button class="back-btn" data-page="courses">← Back to Courses</button>
+      <div id="courseDetailContent"></div>
+    </section>
+
+    <!-- ================= LEARNING PAGE ================= -->
+    <section class="page" id="page-learning">
+      <h2 class="section-title">My Courses</h2>
+      <div id="myCoursesList" class="card-grid"></div>
+    </section>
+
+    <!-- ================= COURSE LEARNING (Inside Course) ================= -->
+    <section class="page" id="page-course-learning">
+      <button class="back-btn" data-page="learning">← Back to My Courses</button>
+      <div id="courseLearningHeader"></div>
+      <div class="learning-tabs">
+        <button class="tab-btn active" data-ltab="home">Course Home</button>
+        <button class="tab-btn" data-ltab="videos">Video Lessons</button>
+        <button class="tab-btn" data-ltab="reading">Reading Materials</button>
+        <button class="tab-btn" data-ltab="quiz">Quizzes</button>
+        <button class="tab-btn" data-ltab="forum">Discussion</button>
+        <button class="tab-btn" data-ltab="resources">Resources</button>
+        <button class="tab-btn" data-ltab="certificate">Certificate</button>
+      </div>
+      <div id="learningTabContent" class="tab-content"></div>
+    </section>
+
+    <!-- ================= DASHBOARD PAGE ================= -->
+    <section class="page" id="page-dashboard">
+      <h2 class="section-title">Dashboard Overview</h2>
+      <div class="dashboard-grid">
+        <div class="dash-card"><h3>My Learning Progress</h3><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div><p>0% completed overall</p></div>
+        <div class="dash-card"><h3>Enrolled Courses</h3><p id="enrolledCount">0</p></div>
+        <div class="dash-card"><h3>Upcoming Deadlines</h3>
+          <ul><li>Quiz: React Basics — 28 Aug</li><li>Assignment: UI Wireframe — 02 Sep</li></ul>
+        </div>
+        <div class="dash-card"><h3>Achievements / Certificates</h3><p id="certCount">0</p></div>
+        <div class="dash-card"><h3>Study Calendar</h3><p>3 sessions scheduled this week</p></div>
+        <div class="dash-card"><h3>Messages / Notifications</h3><ul><li>New reply in Discussion Forum</li><li>Course update: Data Science 101</li></ul></div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT PAGE ================= -->
+    <section class="page" id="page-about">
+      <h2 class="section-title">Our Mission</h2>
+      <p class="about-text">Learnify exists to make quality education accessible to everyone,everywhere.
+ We believe learning should be simple, practical, and engaging.
+Our platform provides courses designed for students and beginners.
+We focus on useful skills that can support academic and career growth.
+Every course is created with clear and easy-to-understand lessons.
+We encourage learners to study at their own pace and build confidence.
+Our goal is to make online learning comfortable and enjoyable.
+We provide both free and affordable learning opportunities.
+We continuously improve our courses based on learner needs.
+Our mission is to help every learner learn, grow, and succeed.</p>
+
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="features-grid">
+        <div class="feature-card">🎯<h3>Focused Learning</h3><p>Bite-sized lessons built for retention.</p></div>
+        <div class="feature-card">👩‍🏫<h3>Real Mentors</h3><p>Learn from working professionals.</p></div>
+        <div class="feature-card">🌍<h3>Learn Anywhere</h3><p>100% online, self-paced.</p></div>
+      </div>
+
+      <h2 class="section-title">Our Mentors</h2>
+      <div class="card-grid" id="mentorsGrid"></div>
+
+      <h2 class="section-title">Success Stories</h2>
+      <div class="card-grid" id="storiesGrid"></div>
+
+      <h2 class="section-title">Contact Us</h2>
+      <form class="auth-form" id="contactForm">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit" class="btn-solid full">Send Message</button>
+      </form>
+    </section>
+
+    <!-- ================= PROFILE PAGE ================= -->
+    <section class="page" id="page-profile">
+      <h2 class="section-title">My Profile</h2>
+      <div class="profile-grid">
+        <form class="auth-form" id="editProfileForm">
+          <h3>Edit Profile</h3>
+          <input type="text" id="profileName" placeholder="Full Name" />
+          <input type="email" id="profileEmail" placeholder="Email" />
+          <button type="submit" class="btn-solid full">Save Changes</button>
+        </form>
+
+        <form class="auth-form" id="changePasswordForm">
+          <h3>Change Password</h3>
+          <input type="password" placeholder="Current Password" required />
+          <input type="password" placeholder="New Password" required />
+          <button type="submit" class="btn-solid full">Update Password</button>
+        </form>
+
+        <div class="auth-form">
+          <h3>Payment History</h3>
+          <table class="mini-table">
+            <tr><th>Course</th><th>Amount</th><th>Date</th></tr>
+            <tr><td>Web Development</td><td>₹490</td><td>10 Jul 2026</td></tr>
+            <tr><td>mobile app development</td><td>₹390</td><td>02 Aug 2026</td></tr>
+          </table>
+        </div>
+
+        <div class="auth-form">
+          <h3>Certificates</h3>
+          <ul id="profileCertList"><li class="muted">No certificates yet.</li></ul>
+        </div>
+      </div>
+      <button class="btn-outline" id="logoutBtn">Logout</button>
+    </section>
+
+    <!-- ================= EXTRA FEATURES ================= -->
+    <section class="page" id="page-extra-live">
+      <h2 class="section-title">Live Classes</h2>
+      <div class="card-grid">
+        <div class="course-card"><h3>Live: React Q&A</h3><p>Today, 6:00 PM</p><button class="btn-solid">Join</button></div>
+        <div class="course-card"><h3>Live: Python Doubt Clearing</h3><p>Tomorrow, 5:00 PM</p><button class="btn-solid">Join</button></div>
+      </div>
+    </section>
+
+    <section class="page" id="page-extra-community">
+      <h2 class="section-title">Community / Discussions</h2>
+      <div class="forum-list">
+        <div class="forum-post"><strong>Ravi:</strong> Can someone explain closures in JS?</div>
+        <div class="forum-post"><strong>Anita:</strong> Best resources for Figma prototyping?</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-extra-leaderboard">
+      <h2 class="section-title">Leaderboard</h2>
+      <table class="mini-table full">
+        <tr><th>Rank</th><th>Student</th><th>Points</th></tr>
+        <tr><td>1</td><td>Priya Sharma</td><td>2450</td></tr>
+        <tr><td>2</td><td>Arjun Mehta</td><td>2310</td></tr>
+        <tr><td>3</td><td>You</td><td>1980</td></tr>
+      </table>
+    </section>
+
+    <section class="page" id="page-extra-wishlist">
+      <h2 class="section-title">Wishlist</h2>
+      <div id="wishlistGrid" class="card-grid"></div>
+    </section>
+
+    <section class="page" id="page-extra-help">
+      <h2 class="section-title">Help & Support (FAQ)</h2>
+      <div class="faq-list">
+        <details><summary>How do I enroll in a course?</summary><p>Go to Courses, open a course, and click "Enroll / Start Course".</p></details>
+        <details><summary>How do I reset my password?</summary><p>Click "Forgot Password" on the login screen.</p></details>
+        <details><summary>Where can I see my certificates?</summary><p>Visit Profile → Certificates section.</p></details>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
